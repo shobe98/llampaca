@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "61917290794",
+    "firebase_url": "https://alpaca-d90d1.firebaseio.com",
+    "project_id": "alpaca-d90d1",
+    "storage_bucket": "alpaca-d90d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61917290794:android:dbfd68feecfb2ebe2f7e53",
+        "android_client_info": {
+          "package_name": "com.ait.alpaca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61917290794-pmb8f438phtslioiq097qhceujj6ctq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ait.alpaca",
+            "certificate_hash": "72ed50f3f2427057a1ad7ce27470ce9742781d6f"
+          }
+        },
+        {
+          "client_id": "61917290794-i5gbntl84tqehasd7g5us3rn38jpkijg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmZyJW4QB5G5REu49SfKfIGp3iKWTeNiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61917290794-i5gbntl84tqehasd7g5us3rn38jpkijg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

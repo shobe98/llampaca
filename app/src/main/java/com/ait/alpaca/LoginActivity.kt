@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         ).addOnSuccessListener {
             val user = it.user
 
-            user.updateProfile(
+            user!!.updateProfile(
                 UserProfileChangeRequest.Builder()
                     .setDisplayName(userNameFromEMail(etEmail.text.toString()))
                     .build()
