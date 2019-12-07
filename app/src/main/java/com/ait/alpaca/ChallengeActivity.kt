@@ -16,6 +16,7 @@ import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.*
+import androidx.core.graphics.scale
 import androidx.lifecycle.LifecycleOwner
 import java.io.File
 import java.util.concurrent.Executors
@@ -125,18 +126,30 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         }
                         runOnUiThread {
-                            updateImagePreview(file)
+                            ivTest.setImageBitmap(BitmapFactory.decodeFile(file.absolutePath).scale(40, 40))
                         }
                     }
                 })
+
+            CameraX.unbind(preview)
+            btnCapture.visibility = View.GONE
+            btnRetry.visibility = View.VISIBLE
+
         }
 
+        btnRetry.setOnClickListener {
+            btnCapture.visibility = View.VISIBLE
+            btnRetry.visibility = View.GONE
+            btnCapture.isEnabled = false
+
+        }
 
         // Bind use cases to lifecycle
         // If Android Studio complains about "this" being not a LifecycleOwner
         // try rebuilding the project or updating the appcompat dependency to
         // version 1.1.0 or higher.
         CameraX.bindToLifecycle(this, preview, imageCapture)
+
     }
 
 
@@ -189,16 +202,4 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         }
     }
 
-    fun updateImagePreview(image: File) {
-
-
-
-        CameraX.unbindAll()
-        btnCapture.visibility = View.GONE
-        cameraView.visibility = View.GONE
-        btnRetry.visibility = View.VISIBLE
-        photoTaken.visibility = View.VISIBLE
-        photoTaken.setImageBitmap(BitmapFactory.decodeFile(image.absolutePath))
-
-    }
 }

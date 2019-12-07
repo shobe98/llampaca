@@ -19,11 +19,11 @@
         android:layout_width="400dp"
         android:layout_height="400dp" />
 
+
     <ImageView
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:id="@+id/photoTaken"
-        android:visibility="gone"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/ivTest"/>
 
 
     <LinearLayout
@@ -44,12 +44,12 @@
             android:enabled="false"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnRetry"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:visibility="gone"
-            app:srcCompat="@drawable/ic_replay" />
+            android:src="@drawable/ic_replay" />
 
 
     </LinearLayout>
