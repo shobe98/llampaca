@@ -6,51 +6,116 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ChallengeActivity">
+    tools:context=".ChallengeActivity"
+    android:background="@drawable/yellow_background">
+
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello llama!" />
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:shadowColor="#90FD73B4"
+        android:shadowDx="20"
+        android:shadowDy="20"
+        android:shadowRadius="5"
+        android:text="PHOTO CHALLENGE"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
 
-    <TextureView
-        android:id="@+id/cameraView"
-        android:layout_width="400dp"
-        android:layout_height="400dp" />
 
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/ivTest"/>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@drawable/green_background"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnQuit"
-            android:layout_width="wrap_content"
+
+        <TextureView
+            android:id="@+id/cameraView"
+            android:padding="15dp"
+            android:layout_width="320dp"
+            android:layout_height="320dp" />
+
+        <Space
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quit"/>
+            android:minHeight="15dp"/>
 
         <ImageButton
             android:id="@+id/btnCapture"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:enabled="false"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
-
-        <ImageView
-            android:id="@+id/btnRetry"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:visibility="gone"
-            android:src="@drawable/ic_replay" />
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            android:background="@drawable/yellow_background"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/press_start_2p"
+            android:textSize="12sp"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>
+
+
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit a photo of a:"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:fontFamily="@font/press_start_2p"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RED APPLE"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/press_start_2p"
+        android:textSize="18sp"
+        android:paddingBottom="10dp"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <Button
+
+        android:id="@+id/btnQuit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quit"
+        android:background="@drawable/pink_background"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/press_start_2p"
+        android:textSize="15sp"
+        android:layout_gravity="left"
+        android:gravity="center"/>
+
+
+
+    <ImageView
+        android:id="@+id/btnRetry"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_replay" />
+
+    <ImageView
+        android:id="@+id/ivTest"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+
 </LinearLayout>

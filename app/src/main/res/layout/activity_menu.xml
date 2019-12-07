@@ -1,26 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Album"
-        android:id="@+id/btnAlbum">
-    </Button>
+    <ImageView
+        android:id="@+id/ivClouds"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@android:drawable/dialog_holo_light_frame"
+        android:scaleType="centerCrop" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next Challenge"
-        android:id="@+id/btnChallenge">
-    </Button>
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="300dp"
+        android:background="@drawable/pink_background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/ivClouds"
+        app:layout_constraintEnd_toEndOf="@+id/ivClouds"
+        app:layout_constraintStart_toStartOf="@+id/ivClouds"
+        app:layout_constraintTop_toTopOf="@+id/ivClouds">
 
 
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/menu"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="15dp"/>
+
+        <Button
+            android:background="@drawable/yellow_background"
+
+            android:id="@+id/btnAlbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="View Album"
+            android:fontFamily="@font/press_start_2p"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            >
+        </Button>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"/>
+
+        <Button
+            android:background="@drawable/yellow_background"
+            android:id="@+id/btnChallenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Next Challenge"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/press_start_2p"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:paddingTop="8dp"
+
+            >
+
+        </Button>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
