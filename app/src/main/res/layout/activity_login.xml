@@ -55,7 +55,8 @@
             android:layout_marginBottom="12dp"
             android:padding="12dp"
             android:onClick="loginClick"
-            android:text="Login"/>
+            android:text="Login"
+            android:backgroundTint="@color/colorAccent"/>
 
         <Button
             android:id="@+id/btnRegister"
@@ -63,7 +64,9 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:onClick="registerClick"
-            android:text="Register"/>
+            android:text="Register"
+            android:backgroundTint="@color/colorAccent"/>
+        />
 
     </LinearLayout>
 </ScrollView>

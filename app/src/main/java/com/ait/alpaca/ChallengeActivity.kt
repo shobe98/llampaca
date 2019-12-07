@@ -18,6 +18,9 @@ import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.core.graphics.scale
 import androidx.lifecycle.LifecycleOwner
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_challenge.ivClouds
+import kotlinx.android.synthetic.main.activity_menu.*
 import java.io.File
 import java.util.concurrent.Executors
 
@@ -30,6 +33,14 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge)
+
+        Glide.with(this).asGif().load(R.drawable.clouds).into(ivClouds)
+
+        btnQuit.setOnClickListener {
+            finish()
+
+        }
+
 
         requestNeededPermission()
 

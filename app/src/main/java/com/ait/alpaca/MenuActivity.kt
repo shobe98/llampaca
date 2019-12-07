@@ -24,5 +24,7 @@ class MenuActivity : AppCompatActivity() {
             startActivity(Intent(this@MenuActivity, ChallengeActivity::class.java))
 
         }
+
+
     }
 }
