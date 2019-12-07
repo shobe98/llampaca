@@ -130,8 +130,8 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                         }
                     }
                 })
-
             CameraX.unbind(preview)
+
             btnCapture.visibility = View.GONE
             btnRetry.visibility = View.VISIBLE
 
