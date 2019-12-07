@@ -15,9 +15,16 @@
 
 
     <TextureView
-        android:id="@+id/view_finder"
-        android:layout_width="640px"
-        android:layout_height="640px" />
+        android:id="@+id/cameraView"
+        android:layout_width="400dp"
+        android:layout_height="400dp" />
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:id="@+id/photoTaken"
+        android:visibility="gone"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,12 +37,20 @@
             android:layout_height="wrap_content"
             android:text="Quit"/>
 
+        <ImageButton
+            android:id="@+id/btnCapture"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:enabled="false"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnCamera"
-            android:text="Camera"
-            android:enabled="false"/>
+            android:id="@+id/btnRetry"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_replay" />
+
 
     </LinearLayout>
 </LinearLayout>

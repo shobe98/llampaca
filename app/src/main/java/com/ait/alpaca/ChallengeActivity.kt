@@ -1,33 +1,30 @@
 package com.ait.alpaca
 
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.scale
-import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import kotlinx.android.synthetic.main.activity_challenge.*
 import android.util.Size
 import android.graphics.Matrix
+import android.hardware.Camera
+import android.util.Log
 import android.view.Surface
-import android.view.TextureView
+import android.view.View
 import android.view.ViewGroup
-import androidx.camera.core.CameraX
-import androidx.camera.core.Preview
-import androidx.camera.core.PreviewConfig
+import androidx.camera.core.*
 import androidx.lifecycle.LifecycleOwner
+import java.io.File
 import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
+
 
 class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     private val executor = Executors.newSingleThreadExecutor()
-    private lateinit var viewFinder: TextureView
 
+    private var cameraPermissionGranted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +33,11 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         requestNeededPermission()
 
 
-        btnCamera.setOnClickListener {
+        if (cameraPermissionGranted) {
             startCamera()
         }
 
 
-        viewFinder = findViewById(R.id.view_finder)
     }
 
 
@@ -49,11 +45,11 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         val matrix = Matrix()
 
         // Compute the center of the view finder
-        val centerX = viewFinder.width / 2f
-        val centerY = viewFinder.height / 2f
+        val centerX = cameraView.width / 2f
+        val centerY = cameraView.height / 2f
 
         // Correct preview output to account for display rotation
-        val rotationDegrees = when(viewFinder.display.rotation) {
+        val rotationDegrees = when (cameraView.display.rotation) {
             Surface.ROTATION_0 -> 0
             Surface.ROTATION_90 -> 90
             Surface.ROTATION_180 -> 180
@@ -63,35 +59,84 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         matrix.postRotate(-rotationDegrees.toFloat(), centerX, centerY)
 
         // Finally, apply transformations to our TextureView
-        viewFinder.setTransform(matrix)    }
+        cameraView.setTransform(matrix)
+    }
 
     private fun startCamera() {
-        // Create configuration object for the viewfinder use case
+        // Create configuration object for the cameraView use case
         val previewConfig = PreviewConfig.Builder().apply {
             setTargetResolution(Size(640, 480))
         }.build()
 
 
-        // Build the viewfinder use case
+        // Build the cameraView use case
         val preview = Preview(previewConfig)
 
-        // Every time the viewfinder is updated, recompute layout
+        // Every time the cameraView is updated, recompute layout
         preview.setOnPreviewOutputUpdateListener {
 
             // To update the SurfaceTexture, we have to remove it and re-add it
-            val parent = viewFinder.parent as ViewGroup
-            parent.removeView(viewFinder)
-            parent.addView(viewFinder, 0)
+            val parent = cameraView.parent as ViewGroup
+            parent.removeView(cameraView)
+            parent.addView(cameraView, 0)
 
-            viewFinder.surfaceTexture = it.surfaceTexture
+            cameraView.surfaceTexture = it.surfaceTexture
             updateTransform()
         }
+
+
+        // Add this before CameraX.bindToLifecycle
+
+        // Create configuration object for the image capture use case
+        val imageCaptureConfig = ImageCaptureConfig.Builder()
+            .apply {
+                // We don't set a resolution for image capture; instead, we
+                // select a capture mode which will infer the appropriate
+                // resolution based on aspect ration and requested mode
+                setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
+            }.build()
+
+        // Build the image capture use case and attach button click listener
+        val imageCapture = ImageCapture(imageCaptureConfig)
+        btnCapture.setOnClickListener {
+            val file = File(
+                externalMediaDirs.first(),
+                "${System.currentTimeMillis()}.jpg"
+            )
+
+            imageCapture.takePicture(file, executor,
+                object : ImageCapture.OnImageSavedListener {
+                    override fun onError(
+                        imageCaptureError: ImageCapture.ImageCaptureError,
+                        message: String,
+                        exc: Throwable?
+                    ) {
+                        val msg = "Photo capture failed: $message"
+                        Log.e("CameraXApp", msg, exc)
+                        cameraView.post {
+                            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onImageSaved(file: File) {
+                        val msg = "Photo capture succeeded: ${file.absolutePath}"
+                        Log.d("CameraXApp", msg)
+                        cameraView.post {
+                            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                        }
+                        runOnUiThread {
+                            updateImagePreview(file)
+                        }
+                    }
+                })
+        }
+
 
         // Bind use cases to lifecycle
         // If Android Studio complains about "this" being not a LifecycleOwner
         // try rebuilding the project or updating the appcompat dependency to
         // version 1.1.0 or higher.
-        CameraX.bindToLifecycle(this, preview)
+        CameraX.bindToLifecycle(this, preview, imageCapture)
     }
 
 
@@ -120,7 +165,8 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
             )
         } else {
             // we already have permission
-            btnCamera.isEnabled = true
+            cameraPermissionGranted = true
+            btnCapture.isEnabled = true
         }
     }
 
@@ -133,11 +179,26 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "CAMERA perm granted", Toast.LENGTH_SHORT).show()
 
-                    btnCamera.isEnabled = true
+                    cameraPermissionGranted = true
+                    btnCapture.isEnabled = true
                 } else {
+                    cameraPermissionGranted = false
                     Toast.makeText(this, "CAMERA perm NOT granted", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    fun updateImagePreview(image: File) {
+
+
+
+        CameraX.unbindAll()
+        btnCapture.visibility = View.GONE
+        cameraView.visibility = View.GONE
+        btnRetry.visibility = View.VISIBLE
+        photoTaken.visibility = View.VISIBLE
+        photoTaken.setImageBitmap(BitmapFactory.decodeFile(image.absolutePath))
+
     }
 }
