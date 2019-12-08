@@ -1,5 +1,6 @@
 package com.ait.alpaca
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,8 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     private lateinit var challengeWord: String
     private lateinit var progressionDocument: DocumentSnapshot
 
+
+
     fun handleSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
         var successful = false
         for (label in labels) {
@@ -68,7 +71,10 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         successfullChallenge()
         CameraX.unbindAll()
         // TODO: Change layout or redirect!
+
+
     }
+
 
     private fun successfullChallenge() {
 
@@ -110,6 +116,12 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
         btnQuit.setOnClickListener {
             finish()
+
+        }
+
+        btnSimulateSuccess.setOnClickListener {
+            startActivity(Intent(this@ChallengeActivity, SuccessActivity::class.java))
+
 
         }
 

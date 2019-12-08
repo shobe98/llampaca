@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_scrolling.btnChallenge
 
 class ScrollingActivity : AppCompatActivity() {
 
+    var numAlpacas = 8
 
 
     lateinit var alpacaAdapter: AlpacaAdapter
@@ -40,13 +41,21 @@ class ScrollingActivity : AppCompatActivity() {
         alpacaAdapter = AlpacaAdapter(this)
         recyclerAlpaca.adapter = alpacaAdapter
 
-        btnAdd.setOnClickListener {
-
-            alpacaAdapter.addTodo(
-                Alpaca(
-                    alpacaAdapter.itemCount + 1))
-
+        for (i in 1..numAlpacas) {
+            alpacaAdapter.addTodo(Alpaca(i))
         }
+
+
+        //btnAdd.setOnClickListener {
+
+            //alpacaAdapter.addTodo(
+                //Alpaca(
+                    //alpacaAdapter.itemCount + 1))
+
+        //}
+
+
+
 
 
 
@@ -58,6 +67,11 @@ class ScrollingActivity : AppCompatActivity() {
         btnChallenge.setOnClickListener {
             startActivity(Intent(this@ScrollingActivity, ChallengeActivity::class.java))
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        //TODO{ANDREI}: get current number
     }
 
 
