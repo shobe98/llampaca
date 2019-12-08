@@ -126,6 +126,7 @@
                 android:fontFamily="@font/press_start_2p"
                 android:textSize="18sp"
                 android:paddingBottom="10dp"
+                android:id="@+id/challenge_placeholder"
                 />
 
             <Space
