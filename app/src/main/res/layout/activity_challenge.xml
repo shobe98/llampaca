@@ -49,6 +49,12 @@
                 android:textSize="25sp"
                 android:layout_gravity="right" />
 
+            <Button
+                android:id="@+id/btnSimulateSuccess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Simulate success"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,6 +138,8 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="5dp"/>
+
+
 
 
 

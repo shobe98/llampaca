@@ -1,5 +1,6 @@
 package com.ait.alpaca
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -21,11 +22,14 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_challenge.ivClouds
+import kotlinx.android.synthetic.main.activity_menu.*
 import java.io.File
 import java.util.concurrent.Executors
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
@@ -34,7 +38,9 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     private lateinit var challengeWord: String
     private lateinit var progressionDocument: DocumentSnapshot
 
-    fun handleMLResults(labels: MutableList<FirebaseVisionImageLabel>) {
+
+
+    fun handleSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
         var successful = false
         for (label in labels) {
             if (label.text == challengeWord) {
@@ -65,7 +71,10 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         successfullChallenge()
         CameraX.unbindAll()
         // TODO: Change layout or redirect!
+
+
     }
+
 
     private fun successfullChallenge() {
 
@@ -75,7 +84,6 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
             it.documents[0].reference.update(mapOf("challenges_solved" to (challengeNumber + 1)))
                 .addOnCompleteListener {
 
-                    //TODO(astanciu): Intent to success activity
                     Toast.makeText(
                         this@ChallengeActivity,
                         "We just recorded your progress",
@@ -111,6 +119,12 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
         }
 
+        btnSimulateSuccess.setOnClickListener {
+            startActivity(Intent(this@ChallengeActivity, SuccessActivity::class.java))
+
+
+        }
+
 
         requestNeededPermission()
 
@@ -133,20 +147,16 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         val db = FirebaseFirestore.getInstance()
 
         db.collection("progression").whereEqualTo("uid", uid).get().addOnCompleteListener {
-            it.addOnSuccessListener {
+            val doc = it.result!!.documents[0]
 
-                var doc = it.documents[0]
-                challengeNumber = doc.get("challenges_solved") as Long
+            challengeNumber = doc.get("challenges_solved") as Long
 
 
-                challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt() + 1]
+            challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt() + 1]
 
-                runOnUiThread {
-                    challenge_placeholder.text =
-                        challengeWord.toUpperCase() + " " + challengeNumber.toString()
-                }
+            runOnUiThread {
+                challenge_placeholder.text = challengeWord.toUpperCase() + " " + challengeNumber.toString()
             }
-
         }
 
     }
@@ -179,6 +189,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         val previewConfig = PreviewConfig.Builder().apply {
             setTargetResolution(Size(640, 480))
         }.build()
+
 
 
         // Build the cameraView use case
@@ -253,7 +264,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
                         labeler.processImage(image)
                             .addOnSuccessListener { labels ->
-                                handleMLResults(labels)
+                                handleSuccess(labels)
                             }
                             .addOnFailureListener { e ->
                                 handleFailure(e)
