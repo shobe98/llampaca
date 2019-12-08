@@ -18,6 +18,8 @@ import androidx.camera.core.*
 import androidx.core.graphics.scale
 import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_challenge.ivClouds
 import kotlinx.android.synthetic.main.activity_menu.*
 import java.io.File
@@ -25,21 +27,75 @@ import java.util.concurrent.Executors
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
+    private lateinit var uid: String
+    private var challengeNumber: Long = 0L
+    private lateinit var challengeWord: String
+    private lateinit var progressionDocument: DocumentSnapshot
+
     fun handleSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
-        for(label in labels) {
-            if(label.confidence > 0.7) {
-                Toast.makeText(this, label.text, Toast.LENGTH_LONG).show()
+        var successful = false
+        for (label in labels) {
+            if (label.text == challengeWord) {
+                successful = true
+                CameraX.unbindAll()
+
+                //TODO(astanciu): Dialog with new llama
+
+                Toast.makeText(
+                    this,
+                    "You finished challenge %d".format(challengeNumber),
+                    Toast.LENGTH_LONG
+                ).show()
+
+
             }
         }
-        challenge_placeholder.text = "SUCCESS"
+
+        if (!successful) {
+            CameraX.unbindAll()
+            Toast.makeText(
+                this,
+                "That is not a %s but you get a llama anyway!".format(challengeWord.toLowerCase()),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        successfullChallenge()
         CameraX.unbindAll()
+        // TODO: Change layout or redirect!
+    }
+
+    private fun successfullChallenge() {
+
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("progression").whereEqualTo("uid", uid).get().addOnSuccessListener {
+            it.documents[0].reference.update(mapOf("challenges_solved" to (challengeNumber + 1)))
+                .addOnCompleteListener {
+
+                    Toast.makeText(
+                        this@ChallengeActivity,
+                        "We just recorded your progress",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                }
+        }.addOnFailureListener {
+            Toast.makeText(
+                this@ChallengeActivity,
+                "Error: ${it.message}", Toast.LENGTH_LONG
+            ).show()
+
+        }
     }
 
     fun handleFailure(e: Exception) {
-        Toast.makeText(this, e.message, Toast.LENGTH_LONG)
+        Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
     }
 
     private val executor = Executors.newSingleThreadExecutor()
@@ -65,10 +121,36 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
             startCamera()
         }
 
+        initializeChallenge()
+
+    }
+
+    private fun initializeChallenge() {
+        uid = "e18flAKNdjQktKemQOHjF0HUo9C3" // Peekler for now
+
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            uid = FirebaseAuth.getInstance().currentUser!!.uid
+        }
+
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("progression").whereEqualTo("uid", uid).get().addOnCompleteListener {
+            val doc = it.result!!.documents[0]
+
+            challengeNumber = doc.get("challenges_solved") as Long
+
+
+            challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt() + 1]
+
+            runOnUiThread {
+                challenge_placeholder.text = challengeWord.toUpperCase() + " " + challengeNumber.toString()
+            }
+        }
 
     }
 
 
+    // Camera stuff
     private fun updateTransform() {
         val matrix = Matrix()
 
@@ -163,7 +245,8 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                             )
                         }
 
-                        val image = FirebaseVisionImage.fromBitmap(BitmapFactory.decodeFile(file.absolutePath))
+                        val image =
+                            FirebaseVisionImage.fromBitmap(BitmapFactory.decodeFile(file.absolutePath))
 
                         val labeler = FirebaseVision.getInstance().onDeviceImageLabeler
 
