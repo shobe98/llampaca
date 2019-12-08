@@ -74,4 +74,31 @@ WARNING: This alpaca is known to resent food puns about its motherland, Hungary<
 
 
 
+
+    <string-array name="words">
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+        <item>METAL</item>
+    </string-array>
+
 </resources>
