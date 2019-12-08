@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlpacaPopup">
+
+
+
+
+
+    <ImageView
+        android:id="@+id/ivCloudsPopup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@android:drawable/dialog_holo_light_frame" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivCloudsPopup"
+        app:layout_constraintTop_toTopOf="@+id/ivCloudsPopup"
+        android:layout_margin="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:background="@drawable/green_background"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvPopupName"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"
+                android:text="NAME"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/press_start_2p"
+                android:textSize="25sp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6">
+
+                <ImageView
+                    android:id="@+id/ivPopupGrass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/za"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"/>
+
+
+                <ImageView
+                    android:id="@+id/ivPopupPic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/za"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/tvPopupDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2.8"
+                android:text=""
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#000000"
+                android:fontFamily="@font/press_start_2p"
+                android:textSize="14sp"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

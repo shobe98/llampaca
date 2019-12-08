@@ -13,7 +13,6 @@
         android:name="com.google.firebase.ml.vision.DEPENDENCIES"
         android:value="label" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,12 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FixedSize">
+        <activity android:name=".AlpacaPopup"></activity>
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".ChallengeActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChallengeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".SplashActivity">

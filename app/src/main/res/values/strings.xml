@@ -29,10 +29,10 @@
     <string name="t">TEST</string>
 
 
-    <string name="a_title">Hill-Dwelling Alpaca</string>
-    <string name="b_title">Mountain-Dwelling Alpaca</string>
+    <string name="a_title">Standard Alpaca</string>
+    <string name="b_title">Mountain Alpaca</string>
     <string name="c_title">Saint Al-Patrick</string>
-    <string name="d_title">AlMacka</string>
+    <string name="d_title">Al-Macka</string>
     <string name="e_title">Sun Paca</string>
     <string name="f_title">Romanian Alpaca</string>
     <string name="g_title">Lovely Alpaca</string>
@@ -40,38 +40,38 @@
     <string name="i_title">Spideypaca</string>
     <string name="j_title">Santpaca</string>
     <string name="k_title">Galaxy Alpaca</string>
-    <string name="l_title">Cotton Candy Alpaca</string>
+    <string name="l_title">Candy Alpaca</string>
     <string name="m_title">James Wool</string>
     <string name="n_title">Babypaca</string>
-    <string name="o_title">Android Developer Alpaca</string>
+    <string name="o_title">App-aca Developer</string>
     <string name="p_title">Llangos</string>
     <string name="q_title">Llampaca</string>
-
     <string name="a_desc">This common alpaca\'s favorite pastime is eating grass and being fluffy</string>
     <string name="b_desc">This alpaca can be found scaling the sheer cliffs of the Himalayas, sometimes it falls off...</string>
     <string name="c_desc">This mythical alpaca resides in the Irish forest and is a heavy drinker of Guinness
-        BONUS: Winning this alpaca brings you extra luck for the week!</string>
+        \n\nBONUS: Winning this alpaca brings you extra luck for the week!</string>
     <string name="d_desc">This alpaca enjoys software development and singing in her college alpaca-pella group</string>
     <string name="e_desc">The illusive Sun Paca is in constant pain due to the fact it is half plant, half flesh</string>
-    <string name="f_desc"></string>
+    <string name="f_desc">This Romanian alpaca is well known for its incredibly low spice tolerance
+    \n\nWARNING: Do not feed paprika</string>
     <string name="g_desc">This alpaca enjoys shooting other alpacas with love-potion laced arrows and watching what happens
-BONUS: If this alpaca spits on you, you will fall in love with the next person you see</string>
+\n\nBONUS: If this alpaca spits on you, you will fall in love with the next person you see</string>
     <string name="h_desc">The Pride Paca is a well-known alpactivist. It enjoys leading parades and knitting rainbow flags</string>
     <string name="i_desc">A superhero of alpaca-kind, this mysterious creature was once a spider until they were bitten by a radioactive alpaca</string>
     <string name="j_desc">This alpaca is known to become stuck in chimneys due to its colossal amounts of fur
-BONUS: If you are lucky, it will leave a pile of grass in your house</string>
+\n\nBONUS: If you are lucky, it will leave a pile of grass in your house</string>
     <string name="k_desc">This alpaca\'s favorite food is Milky Way bars, and surprisingly it hates Galaxy chocolate</string>
     <string name="l_desc">This alpaca remains cheerful despite the constant fear of being mistaken for food by a small child</string>
     <string name="m_desc">This dangerous alpaca prefers its carrot juice shaken, not stirred
-BONUS: The true identity of this alpaca is yet to be uncovered, but some stipulate they are the human spy, James Bond</string>
+\n\nBONUS: The true identity of this alpaca is yet to be uncovered, but some stipulate they are the human spy, James Bond</string>
     <string name="n_desc">This alpaca is unable to put its tongue inside its mouth, and is thus in a perpetual blep</string>
     <string name="o_desc">It is understandable that this alpaca can be found spontaneously developing mobile applications
-BONUS: Proficient in Java, Kotlin, Javascript, Llamascript, C, C++
+\n\nBONUS: Proficient in Java, Kotlin, Javascript, Llamascript, C, C++
 </string>
     <string name="p_desc">A popular salty and cheesy dish that is often eaten by other very hungary alpacas
-WARNING: This alpaca is known to resent food puns about its motherland, Hungary</string>
+\n\nWARNING: This alpaca is known to resent food puns about its motherland, Hungary</string>
     <string name="q_desc">This is not an alpaca, it is a llama</string>
-
+    <string name="hi">HI</string>
 
 
 </resources>
