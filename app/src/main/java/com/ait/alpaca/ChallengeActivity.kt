@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_challenge.*
 import android.util.Size
 import android.graphics.Matrix
-import android.hardware.Camera
 import android.util.Log
 import android.view.Surface
 import android.view.View
@@ -23,9 +22,26 @@ import kotlinx.android.synthetic.main.activity_challenge.ivClouds
 import kotlinx.android.synthetic.main.activity_menu.*
 import java.io.File
 import java.util.concurrent.Executors
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
 
 
 class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
+    fun handleSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
+        for(label in labels) {
+            if(label.confidence > 0.7) {
+                Toast.makeText(this, label.text, Toast.LENGTH_LONG).show()
+            }
+        }
+        challenge_placeholder.text = "SUCCESS"
+        CameraX.unbindAll()
+    }
+
+    fun handleFailure(e: Exception) {
+        Toast.makeText(this, e.message, Toast.LENGTH_LONG)
+    }
+
     private val executor = Executors.newSingleThreadExecutor()
 
     private var cameraPermissionGranted = false
@@ -81,8 +97,10 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         }.build()
 
 
+
         // Build the cameraView use case
         val preview = Preview(previewConfig)
+
 
         // Every time the cameraView is updated, recompute layout
         preview.setOnPreviewOutputUpdateListener {
@@ -113,7 +131,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         btnCapture.setOnClickListener {
             val file = File(
                 externalMediaDirs.first(),
-                "${System.currentTimeMillis()}.jpg"
+                "last_capture.jpg"
             )
 
             imageCapture.takePicture(file, executor,
@@ -137,11 +155,27 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         }
                         runOnUiThread {
-                            ivTest.setImageBitmap(BitmapFactory.decodeFile(file.absolutePath).scale(40, 40))
+                            ivTest.setImageBitmap(
+                                BitmapFactory.decodeFile(file.absolutePath).scale(
+                                    40,
+                                    40
+                                )
+                            )
                         }
+
+                        val image = FirebaseVisionImage.fromBitmap(BitmapFactory.decodeFile(file.absolutePath))
+
+                        val labeler = FirebaseVision.getInstance().onDeviceImageLabeler
+
+                        labeler.processImage(image)
+                            .addOnSuccessListener { labels ->
+                                handleSuccess(labels)
+                            }
+                            .addOnFailureListener { e ->
+                                handleFailure(e)
+                            }
                     }
                 })
-            CameraX.unbind(preview)
 
             btnCapture.visibility = View.GONE
             btnRetry.visibility = View.VISIBLE
@@ -155,12 +189,13 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
         }
 
+
         // Bind use cases to lifecycle
         // If Android Studio complains about "this" being not a LifecycleOwner
         // try rebuilding the project or updating the appcompat dependency to
         // version 1.1.0 or higher.
+        //CameraX.bindToLifecycle(this, preview, imageCapture)
         CameraX.bindToLifecycle(this, preview, imageCapture)
-
     }
 
 
