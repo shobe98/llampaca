@@ -18,29 +18,21 @@ import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.core.graphics.scale
 import androidx.lifecycle.LifecycleOwner
+import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_challenge.ivClouds
-import kotlinx.android.synthetic.main.activity_menu.*
 import java.io.File
 import java.util.concurrent.Executors
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
-import java.util.*
-import kotlin.concurrent.schedule
 
 
 class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
-    private lateinit var uid: String
     private var challengeNumber: Long = 0L
     private lateinit var challengeWord: String
-    private lateinit var progressionDocument: DocumentSnapshot
 
-
-
-    fun handleSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
+    fun handleMLLabelingSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
         var successful = false
         for (label in labels) {
             if (label.text == challengeWord) {
@@ -71,33 +63,13 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         successfullChallenge()
         CameraX.unbindAll()
         // TODO: Change layout or redirect!
-
-
     }
 
-
     private fun successfullChallenge() {
-
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("progression").whereEqualTo("uid", uid).get().addOnSuccessListener {
-            it.documents[0].reference.update(mapOf("challenges_solved" to (challengeNumber + 1)))
-                .addOnCompleteListener {
-
-                    Toast.makeText(
-                        this@ChallengeActivity,
-                        "We just recorded your progress",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                }
-        }.addOnFailureListener {
-            Toast.makeText(
-                this@ChallengeActivity,
-                "Error: ${it.message}", Toast.LENGTH_LONG
-            ).show()
-
-        }
+        ProgressUtils.updateAlpacas()
+        Toast.makeText(this@ChallengeActivity, "Updated your progress!", Toast.LENGTH_LONG).show()
+        startActivity(Intent(this@ChallengeActivity, SuccessActivity::class.java))
+        finish()
     }
 
     fun handleFailure(e: Exception) {
@@ -121,8 +93,6 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
         btnSimulateSuccess.setOnClickListener {
             startActivity(Intent(this@ChallengeActivity, SuccessActivity::class.java))
-
-
         }
 
 
@@ -133,31 +103,14 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
             startCamera()
         }
 
-        initializeChallenge()
 
-    }
+        // Initialize challenge
+        challengeNumber = ProgressUtils.getNumberOfAlpacas()
 
-    private fun initializeChallenge() {
-        uid = "e18flAKNdjQktKemQOHjF0HUo9C3" // Peekler for now
+        challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt() + 1]
 
-        if (FirebaseAuth.getInstance().currentUser != null) {
-            uid = FirebaseAuth.getInstance().currentUser!!.uid
-        }
-
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("progression").whereEqualTo("uid", uid).get().addOnCompleteListener {
-            val doc = it.result!!.documents[0]
-
-            challengeNumber = doc.get("challenges_solved") as Long
-
-
-            challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt() + 1]
-
-            runOnUiThread {
-                challenge_placeholder.text = challengeWord.toUpperCase() + " " + challengeNumber.toString()
-            }
-        }
+        challenge_placeholder.text =
+            challengeWord.toUpperCase() + " " + challengeNumber.toString()
 
     }
 
@@ -189,7 +142,6 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         val previewConfig = PreviewConfig.Builder().apply {
             setTargetResolution(Size(640, 480))
         }.build()
-
 
 
         // Build the cameraView use case
@@ -264,7 +216,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
                         labeler.processImage(image)
                             .addOnSuccessListener { labels ->
-                                handleSuccess(labels)
+                                handleMLLabelingSuccess(labels)
                             }
                             .addOnFailureListener { e ->
                                 handleFailure(e)
