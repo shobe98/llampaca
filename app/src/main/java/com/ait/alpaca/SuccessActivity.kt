@@ -3,6 +3,7 @@ package com.ait.alpaca
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.activity_success.*
@@ -29,8 +30,7 @@ class SuccessActivity : AppCompatActivity() {
     17 to Triple(R.drawable.zq, R.string.q_title, R.string.q_desc))
 
 
-    var numSolved = 8
-    //TODO: Andrei needs to override this with correct number
+    var numSolved = ProgressUtils.getNumberOfAlpacas().toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

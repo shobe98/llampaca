@@ -15,7 +15,10 @@ import kotlinx.android.synthetic.main.activity_challenge.*
 import kotlinx.android.synthetic.main.activity_scrolling.*
 import java.util.*
 import androidx.recyclerview.widget.GridLayoutManager
+import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.activity_scrolling.btnChallenge
 
@@ -41,9 +44,11 @@ class ScrollingActivity : AppCompatActivity() {
         alpacaAdapter = AlpacaAdapter(this)
         recyclerAlpaca.adapter = alpacaAdapter
 
-        for (i in 1..numAlpacas) {
-            alpacaAdapter.addTodo(Alpaca(i))
-        }
+
+        // TODO(maxine): Does this still work if i move it to onStart?
+        //for (i in 1..numAlpacas) {
+        //    alpacaAdapter.addTodo(Alpaca(i))
+        //}
 
 
         //btnAdd.setOnClickListener {
@@ -68,6 +73,18 @@ class ScrollingActivity : AppCompatActivity() {
             startActivity(Intent(this@ScrollingActivity, ChallengeActivity::class.java))
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+
+        numAlpacas = ProgressUtils.getNumberOfAlpacas().toInt()
+
+        for (i in 1..numAlpacas) {
+            alpacaAdapter.addTodo(Alpaca(i))
+        }
+    }
+
+
 
     override fun onRestart() {
         super.onRestart()
