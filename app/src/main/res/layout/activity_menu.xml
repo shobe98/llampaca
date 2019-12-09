@@ -51,6 +51,8 @@
             android:textColor="@color/colorPrimaryDark"
             android:gravity="center"
             android:paddingTop="8dp"
+
+            android:enabled="false"
             >
         </Button>
 
@@ -72,6 +74,7 @@
             android:textSize="18sp"
             android:gravity="center"
             android:paddingTop="8dp"
+            android:enabled="false"
 
             >
 
