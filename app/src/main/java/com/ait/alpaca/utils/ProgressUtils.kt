@@ -37,6 +37,15 @@ object ProgressUtils {
         }
     }
 
+    fun resetProgression() {
+        //TODO andrei
+    }
+
+    fun returnFinished():Boolean {
+        return true
+        //TODO andrei
+    }
+
     private fun setUpProgressionListeners(handler: AlpacaHandler) {
         progressionDocument.addSnapshotListener { documentSnapshot: DocumentSnapshot?, firebaseFirestoreException: FirebaseFirestoreException? ->
             var cloud_alpacas = documentSnapshot!!.get("challenges_solved") as Long
