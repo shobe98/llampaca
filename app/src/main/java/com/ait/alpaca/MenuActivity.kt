@@ -3,10 +3,10 @@ package com.ait.alpaca
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_menu.*
-import kotlinx.android.synthetic.main.activity_splash.*
 
 class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
     override fun handleAlpacasFirstInnit() {
@@ -32,8 +32,13 @@ class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
         }
 
         btnChallenge.setOnClickListener {
-            startActivity(Intent(this@MenuActivity, ChallengeActivity::class.java))
-
+            if(!ProgressUtils.isFinished()) {
+                startActivity(Intent(this@MenuActivity, ChallengeActivity::class.java))
+            }
+            else {
+                // TODO(maxine): what do when game over
+                Toast.makeText(this@MenuActivity, "Sorry bruh, you finished the game!", Toast.LENGTH_LONG).show()
+            }
         }
 
 

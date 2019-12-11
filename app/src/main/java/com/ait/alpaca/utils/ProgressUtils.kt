@@ -1,7 +1,7 @@
 package com.ait.alpaca.utils
 
 import android.util.Log
-import android.widget.Toast
+import com.ait.alpaca.data.Alpaca
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
@@ -38,12 +38,13 @@ object ProgressUtils {
     }
 
     fun resetProgression() {
-        //TODO andrei
+        alpacas = 1
+        uploadAlpacas(1)
     }
 
-    fun returnFinished():Boolean {
-        return true
-        //TODO andrei
+    fun isFinished():Boolean {
+        return alpacas == Alpaca.LAST_CHALLENGE
+
     }
 
     private fun setUpProgressionListeners(handler: AlpacaHandler) {
@@ -62,14 +63,14 @@ object ProgressUtils {
                     Log.i("FIREBASE", "Updated from cloud: ${cloud_alpacas}")
                 }
 
-                cloud_alpacas < alpacas -> uploadAlpacas()
+                cloud_alpacas < alpacas -> uploadAlpacas(alpacas)
                 else -> Log.w("FIREBASE", "Snapshot equals!")     // Do nothing if equal!
 
             }
         }
     }
 
-    private fun uploadAlpacas() {
+    private fun uploadAlpacas(alpacas: Long) {
             progressionDocument.update(mapOf("challenges_solved" to (alpacas)))
                 .addOnFailureListener {
                     Log.e("FIREBASE_ERROR", "Error: ${it.message}")
@@ -77,6 +78,7 @@ object ProgressUtils {
 
                 }.addOnCompleteListener {
                     Log.i("FIREBASE", "Updated to cloud: ${alpacas}")
+                    this.alpacas = alpacas // just to make sure nothing gets fucked up
                 }
     }
 
@@ -90,6 +92,6 @@ object ProgressUtils {
 
     fun updateAlpacas() {
         alpacas += 1
-        uploadAlpacas()
+        uploadAlpacas(alpacas)
     }
 }

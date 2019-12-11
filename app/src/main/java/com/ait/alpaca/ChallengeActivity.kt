@@ -73,8 +73,6 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
     private val executor = Executors.newSingleThreadExecutor()
 
-    private var cameraPermissionGranted = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge)
@@ -93,10 +91,6 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
         requestNeededPermission()
 
-
-        if (cameraPermissionGranted) {
-            startCamera()
-        }
 
 
         // Initialize challenge
@@ -195,14 +189,6 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                         cameraView.post {
                             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         }
-                        runOnUiThread {
-                            ivTest.setImageBitmap(
-                                BitmapFactory.decodeFile(file.absolutePath).scale(
-                                    40,
-                                    40
-                                )
-                            )
-                        }
 
                         val image =
                             FirebaseVisionImage.fromBitmap(BitmapFactory.decodeFile(file.absolutePath))
@@ -219,17 +205,9 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                     }
                 })
 
-            btnCapture.visibility = View.GONE
-            btnRetry.visibility = View.VISIBLE
-
-        }
-
-        btnRetry.setOnClickListener {
-            btnCapture.visibility = View.VISIBLE
-            btnRetry.visibility = View.GONE
             btnCapture.isEnabled = false
-
         }
+
 
 
         // Bind use cases to lifecycle
@@ -266,9 +244,10 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
             )
         } else {
             // we already have permission
-            cameraPermissionGranted = true
             btnCapture.isEnabled = true
+            startCamera()
         }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -279,11 +258,9 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
             101 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "CAMERA perm granted", Toast.LENGTH_SHORT).show()
-
-                    cameraPermissionGranted = true
                     btnCapture.isEnabled = true
+                    startCamera()
                 } else {
-                    cameraPermissionGranted = false
                     Toast.makeText(this, "CAMERA perm NOT granted", Toast.LENGTH_SHORT).show()
                 }
             }
