@@ -12,6 +12,10 @@ class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
     override fun handleAlpacasFirstInnit() {
         btnChallenge.isEnabled = true
         btnAlbum.isEnabled = true
+
+        // This function gets called as soon as connection was established with database.
+
+        // TODO(maxine, andrei): Come up with an indicator for the user to wait - otherwise they will keep pressing the button and the app will seem broken
     }
 
     override fun onCreate(savedInstanceState: Bundle?)  {

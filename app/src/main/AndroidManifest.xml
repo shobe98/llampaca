@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FixedSize">
-        <activity android:name=".SuccessActivity"></activity>
+        <activity android:name=".FailureActivity"></activity>
+        <activity android:name=".SuccessActivity" />
         <activity android:name=".AlpacaPopup" />
         <activity
             android:name=".ScrollingActivity"

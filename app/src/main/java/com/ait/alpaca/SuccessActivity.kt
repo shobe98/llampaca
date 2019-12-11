@@ -30,6 +30,7 @@ class SuccessActivity : AppCompatActivity() {
     17 to Triple(R.drawable.zq, R.string.q_title, R.string.q_desc))
 
 
+    // TODO(maxine): based on this number you can tell which word was used for the challenge and make the "hooray" message more customized
     var numSolved = ProgressUtils.getNumberOfAlpacas().toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {

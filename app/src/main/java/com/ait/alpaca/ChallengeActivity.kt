@@ -37,32 +37,22 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         for (label in labels) {
             if (label.text == challengeWord) {
                 successful = true
-                CameraX.unbindAll()
 
-                //TODO(astanciu): Dialog with new llama
-
-                Toast.makeText(
-                    this,
-                    "You finished challenge %d".format(challengeNumber),
-                    Toast.LENGTH_LONG
-                ).show()
-
-
+                successfullChallenge() // This finishes the activity.
             }
         }
 
         if (!successful) {
-            CameraX.unbindAll()
-            Toast.makeText(
-                this,
-                "That is not a %s but you get a llama anyway!".format(challengeWord.toLowerCase()),
-                Toast.LENGTH_LONG
-            ).show()
+            failedChallenge()
         }
+    }
 
-        successfullChallenge()
-        CameraX.unbindAll()
-        // TODO: Change layout or redirect!
+    private fun failedChallenge() {
+        Toast.makeText(this@ChallengeActivity, "You suck! Can't you find a picture of ${challengeWord}??", Toast.LENGTH_LONG).show()
+        startActivity(Intent(this@ChallengeActivity, FailureActivity::class.java))
+        finish()
+
+
     }
 
     private fun successfullChallenge() {
@@ -70,6 +60,11 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         Toast.makeText(this@ChallengeActivity, "Updated your progress!", Toast.LENGTH_LONG).show()
         startActivity(Intent(this@ChallengeActivity, SuccessActivity::class.java))
         finish()
+    }
+
+    override fun onStop() {
+        CameraX.unbindAll()
+        super.onStop()
     }
 
     fun handleFailure(e: Exception) {
