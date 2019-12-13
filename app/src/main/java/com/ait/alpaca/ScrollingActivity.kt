@@ -45,30 +45,6 @@ class ScrollingActivity : AppCompatActivity() {
         recyclerAlpaca.adapter = alpacaAdapter
 
 
-        // TODO(maxine): Does this still work if i move it to onStart?
-        //for (i in 1..numAlpacas) {
-        //    alpacaAdapter.addTodo(Alpaca(i))
-        //}
-
-
-        //btnAdd.setOnClickListener {
-
-            //alpacaAdapter.addTodo(
-                //Alpaca(
-                    //alpacaAdapter.itemCount + 1))
-
-        //}
-
-
-
-
-
-
-
-
-
-
-
         btnChallenge.setOnClickListener {
             startActivity(Intent(this@ScrollingActivity, ChallengeActivity::class.java))
         }
@@ -79,7 +55,7 @@ class ScrollingActivity : AppCompatActivity() {
 
         numAlpacas = ProgressUtils.getNumberOfAlpacas().toInt()
 
-        for (i in 1..numAlpacas) {
+        for (i in (alpacaAdapter.size() + 1)..numAlpacas) {
             alpacaAdapter.addTodo(Alpaca(i))
         }
     }

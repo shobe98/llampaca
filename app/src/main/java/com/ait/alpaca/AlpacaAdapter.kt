@@ -105,6 +105,8 @@ class AlpacaAdapter : RecyclerView.Adapter<AlpacaAdapter.ViewHolder> {
         notifyItemInserted(todoList.lastIndex)
     }
 
+    fun size(): Int = todoList.size
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName = itemView.tvName
         val ivAlpaca = itemView.ivAlpaca

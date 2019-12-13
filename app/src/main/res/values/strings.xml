@@ -76,28 +76,21 @@
 
     <string-array name="words">
         <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
-        <item>METAL</item>
+        <item>CHAIR</item>
+        <item>ROOM</item>
+        <item>PAPER</item>3
+        <item>FRUIT</item>
+        <item>FOOD</item>
+        <item>APPLE</item>
+        <item>GLASSES</item>
+        <item>SPOON</item>
+        <item>BANANA</item>
+        <item>ORANGE</item>
+        <item>LEMON</item>
+        <item>SHOE</item>
+        <item>ART</item>
+        <item>REFRIGERATOR</item>
+        <item>PERSON</item>
     </string-array>
 
 </resources>

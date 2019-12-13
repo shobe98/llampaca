@@ -35,15 +35,20 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     fun handleMLLabelingSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
         var successful = false
         for (label in labels) {
-            if (label.text == challengeWord) {
+            tvLabels.text = tvLabels.text.toString() + " " + label.text + label.confidence.toString()
+            if (label.text.toLowerCase() == challengeWord.toLowerCase()) {
                 successful = true
 
-                successfullChallenge() // This finishes the activity.
+               // successfullChallenge() // This finishes the activity.
+
             }
         }
 
         if (!successful) {
-            failedChallenge()
+            //failedChallenge()
+            tvLabels.setOnClickListener {
+                failedChallenge()
+            }
         }
     }
 
@@ -69,6 +74,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
     fun handleFailure(e: Exception) {
         Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        throw(Throwable(e))
     }
 
     private val executor = Executors.newSingleThreadExecutor()
@@ -85,7 +91,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         }
 
         btnSimulateSuccess.setOnClickListener {
-            startActivity(Intent(this@ChallengeActivity, SuccessActivity::class.java))
+            successfullChallenge() // will update the database
         }
 
 
@@ -193,7 +199,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                         val image =
                             FirebaseVisionImage.fromBitmap(BitmapFactory.decodeFile(file.absolutePath))
 
-                        val labeler = FirebaseVision.getInstance().onDeviceImageLabeler
+                        val labeler = FirebaseVision.getInstance().cloudImageLabeler
 
                         labeler.processImage(image)
                             .addOnSuccessListener { labels ->
