@@ -14,7 +14,9 @@ class InstructionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_instructions)
 
-        // Glide.with(this).asGif().load(R.drawable.clouds).into(ivClouds)
+        Glide.with(this).asGif().load(R.drawable.clouds).into(ivCloudsInstructions)
+
+
 
 
         btnQuitInstructions.setOnClickListener {

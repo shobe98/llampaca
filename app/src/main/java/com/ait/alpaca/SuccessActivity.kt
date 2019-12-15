@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.ait.alpaca.data.Alpaca
 import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_instructions.*
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.activity_success.*
 
@@ -20,6 +21,11 @@ class SuccessActivity : AppCompatActivity() {
         setContentView(R.layout.activity_success)
 
         Glide.with(this).asGif().load(R.drawable.clouds).into(ivCloudsSuccess)
+
+        btnQuitSuccess.setOnClickListener {
+            finish()
+
+        }
 
 
 

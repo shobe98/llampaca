@@ -11,7 +11,7 @@
 
 
     <ImageView
-        android:id="@+id/ivCloudsSuccess"
+        android:id="@+id/ivCloudsFailure"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -26,13 +26,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ivCloudsPopup"
-        app:layout_constraintTop_toTopOf="@+id/ivCloudsSuccess">
+        app:layout_constraintTop_toTopOf="@+id/ivCloudsFailure">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/yellow_background_transp"
             android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnQuitFailure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="#00F00000"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="right"
+                android:style="?android:attr/borderlessButtonStyle"
+                android:text="X"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -54,6 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="center"
                 android:paddingTop="5dp"
@@ -61,22 +75,21 @@
                 android:shadowRadius="5"
                 android:text="This is not the correct image :("
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"
-                android:layout_margin="10dp"/>
+                android:textSize="15sp" />
 
 
             <Button
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/green_background"
                 android:layout_gravity="center"
-                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/green_background"
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="center"
-                android:textSize="18sp"
                 android:paddingTop="18dp"
-                android:text="Try again" />
+                android:text="Try again"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
 
 
         </LinearLayout>

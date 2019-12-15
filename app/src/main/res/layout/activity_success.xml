@@ -42,7 +42,8 @@
 
             <Button
                 android:background="#00F00000"
-                android:id="@+id/btnQuitInstructions"
+                android:id="@+id/btnQuitSuccess"
+                android:style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/press_start_2p"

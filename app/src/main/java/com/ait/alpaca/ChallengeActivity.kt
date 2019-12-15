@@ -87,9 +87,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
         }
 
-        btnSimulateSuccess.setOnClickListener {
-            successfullChallenge() // will update the database
-        }
+
 
 
         requestNeededPermission()
