@@ -58,11 +58,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/press_start_2p"
-                    android:gravity="right"
-                    android:text="X"
+                    android:gravity="end"
+                    android:text="@string/x"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="25sp"
-                    android:layout_gravity="right" />
+                    android:layout_gravity="end" />
 
 
 
@@ -77,7 +77,7 @@
                     android:shadowDx="20"
                     android:shadowDy="20"
                     android:shadowRadius="5"
-                    android:text="PHOTO CHALLENGE"
+                    android:text="@string/photo_challenge"
                     android:layout_gravity="center"
                     android:textColor="#000000"
                     android:textSize="20sp" />
@@ -125,7 +125,7 @@
                     android:paddingTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Submit a photo of a:"
+                    android:text="@string/submit_a_photo_of_a"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#000000"
@@ -137,7 +137,7 @@
                     android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="RED APPLE"
+                    android:text="@string/red_apple"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="@color/colorPrimaryDark"
