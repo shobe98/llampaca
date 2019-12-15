@@ -79,7 +79,7 @@
     <string name="incorrect">Incorrect</string>
     <string name="this_is_not_the_correct_image">This is not the correct image :(</string>
     <string name="try_again">Try again</string>
-    <string name="welcome_farmer">Welcome farmer!    You are now in the magical land of Llampaca    There are many rare types of alpacas and llamas to collect here!    Complete the challenges on the challenge page to collect new alpacas and llamas  View your collection on the album page, and if you finish the game you can restart with the reset button   Happy Hunting :)</string>
+    <string name="welcome_farmer">Welcome farmer! \n\n You are now in the magical land of Llampaca \n\n There are many rare types of alpacas and llamas to collect here! \n\n Complete the challenges on the challenge page to collect new alpacas and llamas \n\n View your collection on the album page, and if you finish the game you can restart with the reset button \n\n Happy Hunting :)</string>
     <string name="internet_connection">PLEASE NOTE: You cannot access challenges or the album without an internet connection</string>
     <string name="_123456">123456</string>
     <string name="login">Login</string>
@@ -89,10 +89,10 @@
     <string name="instructions">Instructions</string>
     <string name="you_win">YOU WIN!</string>
     <string name="present">Click the present below to open your new alpaca</string>
-    <string name="str_restart">Restart</string>
 
 
     <string-array name="words">
+        <item>SHOE</item>
         <item>BANANA</item>
         <item>CHAIR</item>
         <item>ROOM</item>
@@ -102,13 +102,12 @@
         <item>APPLE</item>
         <item>GLASSES</item>
         <item>SPOON</item>
-        <item>BANANA</item>
-        <item>ORANGE</item>
         <item>LEMON</item>
-        <item>SHOE</item>
         <item>ART</item>
         <item>REFRIGERATOR</item>
-        <item>PERSON</item>
+        <item>ART</item>
+        <item>BANANA</item>
+        <item>ORANGE</item>
         <item>APPLE</item>
         <item>APPLE</item>
         <item>APPLE</item>

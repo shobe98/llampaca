@@ -12,10 +12,10 @@ import kotlinx.android.synthetic.main.activity_scrolling.*
 
 class ScrollingActivity : AppCompatActivity() {
 
-    private var numAlpacas = 8
+    var numAlpacas = 8
 
 
-    private lateinit var alpacaAdapter: AlpacaAdapter
+    lateinit var alpacaAdapter: AlpacaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class ScrollingActivity : AppCompatActivity() {
         }
 
         val numberOfColumns = 2
-        recyclerAlpaca.layoutManager = GridLayoutManager(this, numberOfColumns)
+        recyclerAlpaca.setLayoutManager(GridLayoutManager(this, numberOfColumns))
 
 
         alpacaAdapter = AlpacaAdapter(this)
@@ -52,6 +52,15 @@ class ScrollingActivity : AppCompatActivity() {
             alpacaAdapter.addTodo(Alpaca(i))
         }
     }
+
+
+
+    override fun onRestart() {
+        super.onRestart()
+        //TODO{ANDREI}: get current number
+    }
+
+
 
 
 }

@@ -13,7 +13,7 @@ class SuccessActivity : AppCompatActivity() {
 
 
     // TODO(maxine): based on this number you can tell which word was used for the challenge and make the "hooray" message more customized
-    private var numSolved = ProgressUtils.getNumberOfAlpacas().toInt()
+    var numSolved = ProgressUtils.getNumberOfAlpacas().toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

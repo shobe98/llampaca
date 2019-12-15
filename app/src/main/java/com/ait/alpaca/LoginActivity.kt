@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity(), RegistrationUtils.RegistrationHandler
                     .build()
             )
 
-            RegistrationUtils.firstTimeUser(user.uid, this)
+            RegistrationUtils.firstTimeUser(user.uid.toString(), this)
 
             Toast.makeText(
                 this@LoginActivity, "Registration OK",
@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity(), RegistrationUtils.RegistrationHandler
     }
 
 
-    private fun userNameFromEMail(email: String) = email.substringBefore("@")
+    fun userNameFromEMail(email: String) = email.substringBefore("@")
 
     private fun isFormValid(): Boolean {
         return when {
