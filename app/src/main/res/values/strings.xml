@@ -75,10 +75,10 @@
 
 
     <string-array name="words">
-        <item>METAL</item>
+        <item>BANANA</item>
         <item>CHAIR</item>
         <item>ROOM</item>
-        <item>PAPER</item>3
+        <item>PAPER</item>
         <item>FRUIT</item>
         <item>FOOD</item>
         <item>APPLE</item>
@@ -91,6 +91,13 @@
         <item>ART</item>
         <item>REFRIGERATOR</item>
         <item>PERSON</item>
+        <item>APPLE</item>
+        <item>APPLE</item>
+        <item>APPLE</item>
+        <item>APPLE</item>
+        <item>APPLE</item>
+        <item>APPLE</item>
+        <item>APPLE</item>
     </string-array>
 
 </resources>

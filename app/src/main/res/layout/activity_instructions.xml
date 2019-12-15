@@ -50,7 +50,6 @@
                 android:background="#00F00000"
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="right"
-                android:style="?android:attr/borderlessButtonStyle"
                 android:text="X"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp" />

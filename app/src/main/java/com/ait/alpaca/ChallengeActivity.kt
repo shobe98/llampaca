@@ -97,7 +97,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         // Initialize challenge
         challengeNumber = ProgressUtils.getNumberOfAlpacas()
 
-        challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt() + 1]
+        challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt()]
 
         challenge_placeholder.text =
             challengeWord.toUpperCase(Locale.ENGLISH)
