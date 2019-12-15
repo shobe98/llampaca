@@ -1,12 +1,9 @@
 package com.ait.alpaca.utils
 
 import android.util.Log
-import com.ait.alpaca.LoginActivity
 import com.ait.alpaca.data.Alpaca
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-
-
 
 
 object ProgressUtils {
