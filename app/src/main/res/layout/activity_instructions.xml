@@ -80,9 +80,27 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="10dp"
                 android:shadowRadius="5"
-                android:text="Welcome farmer! \n\n You are now in the magical land of Llampaca \n\n There are many rare types of alpacas and llamas to collect here! \n\n Complete the challenges on the challenge page to collect new alpacas and llamas\n\nView your collection on the album page, and if you finish the game you can restart with the reset button \n\n You cannot access challenges or the album without an internet connection \n\nHappy Hunting :)"
+                android:text="Welcome farmer! \n\n You are now in the magical land of Llampaca \n\n There are many rare types of alpacas and llamas to collect here! \n\n Complete the challenges on the challenge page to collect new alpacas and llamas\n\nView your collection on the album page, and if you finish the game you can restart with the reset button  \n\nHappy Hunting :)"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:shadowRadius="5"
+                android:text="PLEASE NOTE: You cannot access challenges or the album without an internet connection"
+
+                android:textColor="#F00000"
+                android:textSize="12sp" />
+
+
+
 
         </LinearLayout>
     </LinearLayout>
