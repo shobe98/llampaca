@@ -41,6 +41,9 @@ class ScrollingActivity : AppCompatActivity() {
             ivAlpsAlbum.visibility = View.VISIBLE
         }
 
+        btnQuitAlbum.setOnClickListener {
+            finish()
+        }
 
         val numberOfColumns = 2
         recyclerAlpaca.setLayoutManager(GridLayoutManager(this, numberOfColumns))
