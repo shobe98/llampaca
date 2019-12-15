@@ -48,6 +48,10 @@ class ScrollingActivity : AppCompatActivity() {
         btnChallenge.setOnClickListener {
             startActivity(Intent(this@ScrollingActivity, ChallengeActivity::class.java))
         }
+
+        btnInstructions.setOnClickListener {
+            startActivity(Intent(this@ScrollingActivity, InstructionsActivity::class.java))
+        }
     }
 
     override fun onStart() {

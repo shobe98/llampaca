@@ -80,6 +80,29 @@
 
         </Button>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"/>
+
+        <Button
+            android:background="@drawable/yellow_background"
+            android:id="@+id/btnInstructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Instructions"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/press_start_2p"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:enabled="false"
+
+            >
+
+        </Button>
+
 
 
     </LinearLayout>
