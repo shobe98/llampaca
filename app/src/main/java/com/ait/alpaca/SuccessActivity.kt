@@ -44,8 +44,8 @@ class SuccessActivity : AppCompatActivity() {
         btnPresent.setOnClickListener {
 
             val intent = Intent(this@SuccessActivity, AlpacaPopup::class.java)
-            intent.putExtra("name", "TEST")
-            intent.putExtra("desc", "TEST")
+            intent.putExtra("name", alpacaMap.getValue(numSolved).second)
+            intent.putExtra("desc", alpacaMap.getValue(numSolved).third)
             intent.putExtra("image", alpacaMap.getValue(numSolved).first)
 
             //intent.putExtra("name", alpacaMap.getValue(numSolved).second)
