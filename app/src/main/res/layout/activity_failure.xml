@@ -33,7 +33,7 @@
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ivCloudsPopup"
+        app:layout_constraintStart_toStartOf="@+id/ivCloudsFailure"
         app:layout_constraintTop_toTopOf="@+id/ivCloudsFailure">
 
         <LinearLayout
@@ -46,11 +46,11 @@
                 android:id="@+id/btnQuitFailure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:background="#00F00000"
                 android:fontFamily="@font/press_start_2p"
-                android:gravity="right"
-                android:text="X"
+                android:gravity="end"
+                android:text="@string/x"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp" />
 
@@ -66,7 +66,7 @@
                 android:shadowDx="20"
                 android:shadowDy="20"
                 android:shadowRadius="5"
-                android:text="Incorrect"
+                android:text="@string/incorrect"
                 android:textColor="#000000"
                 android:textSize="25sp" />
 
@@ -80,7 +80,7 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="10dp"
                 android:shadowRadius="5"
-                android:text="This is not the correct image :("
+                android:text="@string/this_is_not_the_correct_image"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp" />
 
@@ -94,7 +94,7 @@
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="center"
                 android:paddingTop="18dp"
-                android:text="Try again"
+                android:text="@string/try_again"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 
