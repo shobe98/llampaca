@@ -55,5 +55,30 @@ class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
         }
 
 
+        if(ProgressUtils.isInitialized()) {
+            btnChallenge.isEnabled = true
+            btnAlbum.isEnabled = true
+        }
+
+    }
+
+    override fun onResume() {
+        if (ProgressUtils.isFinished()) {
+            ivAlpsMenu.visibility = View.VISIBLE
+
+            btnChallenge.text = "Restart"
+
+            btnChallenge.setOnClickListener {
+                ProgressUtils.resetProgression()
+
+                var intent = Intent(this@MenuActivity, SplashActivity::class.java)
+
+                intent.putExtra("BYPASS_LOGIN", true)
+
+                startActivity(intent)
+                finish()
+            }
+        }
+        super.onResume()
     }
 }

@@ -17,10 +17,18 @@ class SplashActivity : AppCompatActivity() {
         Glide.with(this).asGif().load(R.drawable.splash).into(ivSplash)
 
 
-        Handler().postDelayed({
-            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-            finish()
-        }, 4000)
+        if(intent.getBooleanExtra("BYPASS_LOGIN", false)) {
+            Handler().postDelayed({
+                startActivity(Intent(this@SplashActivity, MenuActivity::class.java))
+                finish()
+            }, 4000)
+        }
+        else {
+            Handler().postDelayed({
+                startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                finish()
+            }, 4000)
+        }
     }
 }
 

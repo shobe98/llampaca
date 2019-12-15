@@ -17,6 +17,10 @@ object ProgressUtils {
     private var alpacas: Long = -1
     private lateinit var progressionDocument: DocumentReference
 
+    private var isInitialized = false
+
+    fun isInitialized() = isInitialized
+
     fun initializeSingleton(handler: AlpacaHandler) {
        if (FirebaseAuth.getInstance().currentUser != null) {
             uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -41,8 +45,8 @@ object ProgressUtils {
     }
 
     fun resetProgression() {
-        alpacas = 1
-        uploadAlpacas(1)
+        alpacas = 0
+        uploadAlpacas(0)
     }
 
     fun isFinished():Boolean {
@@ -59,6 +63,7 @@ object ProgressUtils {
 
                     alpacas = cloudAlpacas
                     Log.i("FIREBASE", "First time fetched from cloud: ${cloudAlpacas}")
+                    isInitialized = true
                     handler.handleAlpacasFirstInnit()
                 }
                 cloudAlpacas > alpacas -> {
