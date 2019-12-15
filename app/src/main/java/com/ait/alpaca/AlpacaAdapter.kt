@@ -39,9 +39,9 @@ class AlpacaAdapter(val context: Context) : RecyclerView.Adapter<AlpacaAdapter.V
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var alpaca = todoList.get(holder.adapterPosition)
-        holder.tvName.text = context.getString(Alpaca.alpacaMap.getValue(alpaca.id).second)
-        holder.ivAlpaca.setImageResource(Alpaca.alpacaMap.getValue(alpaca.id).first)
+        var alpaca = todoList[holder.adapterPosition]
+        holder.tvName.text = context.getString(Alpaca.alpacaMap[alpaca.id - 1].second)
+        holder.ivAlpaca.setImageResource(Alpaca.alpacaMap[alpaca.id - 1].first)
 
 
 
@@ -49,9 +49,9 @@ class AlpacaAdapter(val context: Context) : RecyclerView.Adapter<AlpacaAdapter.V
 
             var alpaca = todoList.get(holder.adapterPosition)
             val intent = Intent(this.context, AlpacaPopup::class.java)
-            intent.putExtra("name", Alpaca.alpacaMap.getValue(alpaca.id).second)
-            intent.putExtra("desc", Alpaca.alpacaMap.getValue(alpaca.id).third)
-            intent.putExtra("image", Alpaca.alpacaMap.getValue(alpaca.id).first)
+            intent.putExtra("name", Alpaca.alpacaMap[alpaca.id - 1].second)
+            intent.putExtra("desc", Alpaca.alpacaMap[alpaca.id - 1].third)
+            intent.putExtra("image", Alpaca.alpacaMap[alpaca.id - 1].first)
 
             context.startActivity(intent)
 

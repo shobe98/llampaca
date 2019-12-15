@@ -13,6 +13,7 @@ import android.util.Size
 import android.graphics.Matrix
 import android.util.Log
 import android.view.Surface
+import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.lifecycle.LifecycleOwner
@@ -24,6 +25,7 @@ import java.util.concurrent.Executors
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
+import kotlinx.android.synthetic.main.activity_scrolling.*
 import java.util.*
 
 
@@ -82,6 +84,9 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
         Glide.with(this).asGif().load(R.drawable.clouds).into(ivClouds)
 
+        if (ProgressUtils.isFinished()) {
+            ivAlpsChallenge.visibility = View.VISIBLE
+        }
         btnQuit.setOnClickListener {
             finish()
 

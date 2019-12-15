@@ -3,11 +3,13 @@ package com.ait.alpaca
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.ait.alpaca.data.Alpaca
 import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_instructions.*
 import kotlinx.android.synthetic.main.activity_menu.*
+import kotlinx.android.synthetic.main.activity_scrolling.*
 import kotlinx.android.synthetic.main.activity_success.*
 
 class SuccessActivity : AppCompatActivity() {
@@ -22,6 +24,10 @@ class SuccessActivity : AppCompatActivity() {
 
         Glide.with(this).asGif().load(R.drawable.clouds).into(ivCloudsSuccess)
 
+        if (ProgressUtils.isFinished()) {
+            ivAlpsSuccess.visibility = View.VISIBLE
+        }
+
         btnQuitSuccess.setOnClickListener {
             finish()
 
@@ -32,13 +38,10 @@ class SuccessActivity : AppCompatActivity() {
         btnPresent.setOnClickListener {
 
             val intent = Intent(this@SuccessActivity, AlpacaPopup::class.java)
-            intent.putExtra("name", Alpaca.alpacaMap.getValue(numSolved).second)
-            intent.putExtra("desc", Alpaca.alpacaMap.getValue(numSolved).third)
-            intent.putExtra("image", Alpaca.alpacaMap.getValue(numSolved).first)
+            intent.putExtra("name", Alpaca.alpacaMap[numSolved - 1].second)
+            intent.putExtra("desc", Alpaca.alpacaMap[numSolved - 1].third)
+            intent.putExtra("image", Alpaca.alpacaMap[numSolved - 1].first)
 
-            //intent.putExtra("name", alpacaMap.getValue(numSolved).second)
-            //intent.putExtra("desc", alpacaMap.getValue(numSolved).third)
-            //intent.putExtra("image", alpacaMap.getValue(numSolved).first)
             startActivity(intent)
             finish()
 
