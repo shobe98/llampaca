@@ -56,19 +56,19 @@ object ProgressUtils {
 
     private fun setUpProgressionListeners(handler: AlpacaHandler) {
         progressionDocument.addSnapshotListener { documentSnapshot: DocumentSnapshot?, firebaseFirestoreException: FirebaseFirestoreException? ->
-            var cloudAlpacas = documentSnapshot!!.get("challenges_solved") as Long
+            val cloudAlpacas = documentSnapshot!!.get("challenges_solved") as Long
 
             when {
                 alpacas == -1L -> {
 
                     alpacas = cloudAlpacas
-                    Log.i("FIREBASE", "First time fetched from cloud: ${cloudAlpacas}")
+                    Log.i("FIREBASE", "First time fetched from cloud: $cloudAlpacas")
                     isInitialized = true
                     handler.handleAlpacasFirstInnit()
                 }
                 cloudAlpacas > alpacas -> {
                     alpacas = cloudAlpacas
-                    Log.i("FIREBASE", "Updated from cloud: ${cloudAlpacas}")
+                    Log.i("FIREBASE", "Updated from cloud: $cloudAlpacas")
                 }
 
                 cloudAlpacas < alpacas -> uploadAlpacas(alpacas)
@@ -85,7 +85,7 @@ object ProgressUtils {
                     throw (Throwable("Error: ${it.message}"))
 
                 }.addOnCompleteListener {
-                    Log.i("FIREBASE", "Updated to cloud: ${alpacas}")
+                    Log.i("FIREBASE", "Updated to cloud: $alpacas")
                     this.alpacas = alpacas // just to make sure nothing gets fucked up
                 }
     }

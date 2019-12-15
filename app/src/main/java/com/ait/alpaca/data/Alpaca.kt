@@ -7,7 +7,7 @@ data class Alpaca(
     var id: Int
 ) {
     companion object {
-        val LAST_CHALLENGE = 17L // the number of alpacas
+        const val LAST_CHALLENGE = 17L // the number of alpacas
         val alpacaMap = arrayListOf(
             Triple(R.drawable.za, R.string.a_title, R.string.a_desc),
             Triple(R.drawable.zb, R.string.b_title, R.string.b_desc),

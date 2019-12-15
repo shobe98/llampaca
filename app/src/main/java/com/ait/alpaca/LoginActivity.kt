@@ -1,11 +1,10 @@
 package com.ait.alpaca
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.ait.alpaca.utils.ProgressUtils
+import androidx.appcompat.app.AppCompatActivity
 import com.ait.alpaca.utils.RegistrationUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -67,7 +66,7 @@ class LoginActivity : AppCompatActivity(), RegistrationUtils.RegistrationHandler
                     .build()
             )
 
-            RegistrationUtils.firstTimeUser(user.uid.toString(), this)
+            RegistrationUtils.firstTimeUser(user.uid, this)
 
             Toast.makeText(
                 this@LoginActivity, "Registration OK",
@@ -82,7 +81,7 @@ class LoginActivity : AppCompatActivity(), RegistrationUtils.RegistrationHandler
     }
 
 
-    fun userNameFromEMail(email: String) = email.substringBefore("@")
+    private fun userNameFromEMail(email: String) = email.substringBefore("@")
 
     private fun isFormValid(): Boolean {
         return when {

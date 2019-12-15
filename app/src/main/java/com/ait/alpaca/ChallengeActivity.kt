@@ -3,30 +3,28 @@ package com.ait.alpaca
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_challenge.*
-import android.util.Size
 import android.graphics.Matrix
+import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_challenge.ivClouds
-import java.io.File
-import java.util.concurrent.Executors
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
-import kotlinx.android.synthetic.main.activity_scrolling.*
+import kotlinx.android.synthetic.main.activity_challenge.*
+import java.io.File
 import java.util.*
+import java.util.concurrent.Executors
 
 
 class ChallengeActivity : AppCompatActivity(), LifecycleOwner {

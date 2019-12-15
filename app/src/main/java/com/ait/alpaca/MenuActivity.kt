@@ -66,12 +66,12 @@ class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
         if (ProgressUtils.isFinished()) {
             ivAlpsMenu.visibility = View.VISIBLE
 
-            btnChallenge.text = "Restart"
+            btnChallenge.text = getString(R.string.str_restart)
 
             btnChallenge.setOnClickListener {
                 ProgressUtils.resetProgression()
 
-                var intent = Intent(this@MenuActivity, SplashActivity::class.java)
+                val intent = Intent(this@MenuActivity, SplashActivity::class.java)
 
                 intent.putExtra("BYPASS_LOGIN", true)
 

@@ -1,22 +1,19 @@
 package com.ait.alpaca
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.ait.alpaca.data.Alpaca
 import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_instructions.*
-import kotlinx.android.synthetic.main.activity_menu.*
-import kotlinx.android.synthetic.main.activity_scrolling.*
 import kotlinx.android.synthetic.main.activity_success.*
 
 class SuccessActivity : AppCompatActivity() {
 
 
     // TODO(maxine): based on this number you can tell which word was used for the challenge and make the "hooray" message more customized
-    var numSolved = ProgressUtils.getNumberOfAlpacas().toInt()
+    private var numSolved = ProgressUtils.getNumberOfAlpacas().toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

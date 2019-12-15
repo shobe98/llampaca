@@ -16,21 +16,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 
 
-class AlpacaAdapter(val context: Context) : RecyclerView.Adapter<AlpacaAdapter.ViewHolder>() {
+class AlpacaAdapter(private val context: Context) : RecyclerView.Adapter<AlpacaAdapter.ViewHolder>() {
 
 
 
-    var todoList = mutableListOf<Alpaca>()
+    private var todoList = mutableListOf<Alpaca>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val todoRow = LayoutInflater.from(context).inflate(
             R.layout.alpaca_cell, parent, false
         )
-        val lp = todoRow.getLayoutParams() as GridLayoutManager.LayoutParams
-        lp.height = 3 * parent.getMeasuredHeight() / 8;
+        val lp = todoRow.layoutParams as GridLayoutManager.LayoutParams
+        lp.height = 3 * parent.measuredHeight / 8
 
-        todoRow.setLayoutParams(lp)
+        todoRow.layoutParams = lp
         return ViewHolder(todoRow)
     }
 
@@ -39,7 +39,7 @@ class AlpacaAdapter(val context: Context) : RecyclerView.Adapter<AlpacaAdapter.V
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var alpaca = todoList[holder.adapterPosition]
+        val alpaca = todoList[holder.adapterPosition]
         holder.tvName.text = context.getString(Alpaca.alpacaMap[alpaca.id - 1].second)
         holder.ivAlpaca.setImageResource(Alpaca.alpacaMap[alpaca.id - 1].first)
 
@@ -47,7 +47,7 @@ class AlpacaAdapter(val context: Context) : RecyclerView.Adapter<AlpacaAdapter.V
 
         holder.itemView.setOnClickListener {
 
-            var alpaca = todoList.get(holder.adapterPosition)
+            val alpaca = todoList[holder.adapterPosition]
             val intent = Intent(this.context, AlpacaPopup::class.java)
             intent.putExtra("name", Alpaca.alpacaMap[alpaca.id - 1].second)
             intent.putExtra("desc", Alpaca.alpacaMap[alpaca.id - 1].third)
@@ -60,11 +60,6 @@ class AlpacaAdapter(val context: Context) : RecyclerView.Adapter<AlpacaAdapter.V
 
 
 
-    }
-
-    fun deleteTodo(index: Int){
-        todoList.removeAt(index)
-        notifyItemRemoved(index)
     }
 
     fun addTodo(alpaca: Alpaca) {
