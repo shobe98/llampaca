@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/alpacas"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:visibility="invisible"/>
 
 
     <LinearLayout

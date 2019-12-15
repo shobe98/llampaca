@@ -3,6 +3,7 @@ package com.ait.alpaca
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
@@ -13,12 +14,17 @@ class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
         btnChallenge.isEnabled = true
         btnAlbum.isEnabled = true
 
+
+        if (ProgressUtils.isFinished()) {
+            ivAlpsMenu.visibility = View.VISIBLE
+        }
+
         // This function gets called as soon as connection was established with database.
 
         // TODO(maxine, andrei): Come up with an indicator for the user to wait - otherwise they will keep pressing the button and the app will seem broken
     }
 
-    override fun onCreate(savedInstanceState: Bundle?)  {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
@@ -36,12 +42,15 @@ class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
         }
 
         btnChallenge.setOnClickListener {
-            if(!ProgressUtils.isFinished()) {
+            if (!ProgressUtils.isFinished()) {
                 startActivity(Intent(this@MenuActivity, ChallengeActivity::class.java))
-            }
-            else {
+            } else {
                 // TODO(maxine): what do when game over
-                Toast.makeText(this@MenuActivity, "Sorry bruh, you finished the game!", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@MenuActivity,
+                    "Sorry bruh, you finished the game!",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
