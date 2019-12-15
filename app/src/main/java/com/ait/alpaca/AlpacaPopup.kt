@@ -24,6 +24,11 @@ class AlpacaPopup : AppCompatActivity() {
 
         if (ProgressUtils.isFinished()) {
             ivAlpsPopup.visibility = View.VISIBLE
+
+        }
+
+        btnQuitPopup.setOnClickListener {
+            finish()
         }
 
         tvPopupName.text = getString(intent.getIntExtra("name", -1))
