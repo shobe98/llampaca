@@ -70,7 +70,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     }
 
     fun handleMLResponseFailure(e: Exception) {
-        Log.e("ML_ERROR", e.message)
+        Log.e("ML_ERROR", e.message.toString())
         throw(Throwable(e))
     }
 

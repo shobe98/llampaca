@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.ait.alpaca.utils.ProgressUtils
+import com.ait.alpaca.utils.RegistrationUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), RegistrationUtils.RegistrationHandler {
+    override fun registrationCallback() {
+        btnLogin.isEnabled = true
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
+        btnLogin.isEnabled = false
+
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(
             etEmail.text.toString(), etPassword.text.toString()
         ).addOnSuccessListener {
@@ -59,10 +67,13 @@ class LoginActivity : AppCompatActivity() {
                     .build()
             )
 
+            RegistrationUtils.firstTimeUser(user.uid.toString(), this)
+
             Toast.makeText(
                 this@LoginActivity, "Registration OK",
                 Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
+            btnLogin.isEnabled = true
             Toast.makeText(
                 this@LoginActivity, "Error: ${it.message}",
                 Toast.LENGTH_LONG).show()

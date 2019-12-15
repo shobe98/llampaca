@@ -1,11 +1,16 @@
 package com.ait.alpaca.utils
 
 import android.util.Log
+import com.ait.alpaca.LoginActivity
 import com.ait.alpaca.data.Alpaca
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
+
+
+
 object ProgressUtils {
+
     interface AlpacaHandler { //hahaha
         fun handleAlpacasFirstInnit()
     }
@@ -27,6 +32,8 @@ object ProgressUtils {
         var progressionDocumentId: String?
 
         progression.get().addOnSuccessListener {
+
+
             progressionDocumentId = it!!.documents[0].id
             progressionDocument = db.collection("progression").document(progressionDocumentId!!)
             setUpProgressionListeners(handler)
@@ -93,4 +100,6 @@ object ProgressUtils {
         alpacas += 1
         uploadAlpacas(alpacas)
     }
+
+
 }
