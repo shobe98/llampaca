@@ -2,7 +2,9 @@ package com.ait.alpaca
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -34,6 +36,10 @@ class ScrollingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_scrolling)
 
         Glide.with(this).asGif().load(R.drawable.clouds).into(ivCloudsScroll)
+
+        if (ProgressUtils.isFinished()) {
+            ivAlpsAlbum.visibility = View.VISIBLE
+        }
 
 
         val numberOfColumns = 2

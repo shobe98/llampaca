@@ -12,6 +12,14 @@
         app:srcCompat="@android:drawable/dialog_holo_light_frame"
         android:scaleType="centerCrop" />
 
+    <ImageView
+        android:id="@+id/ivAlpsAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/alpacas"
+        android:scaleType="centerCrop"
+        android:visibility="invisible"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAlpaca"

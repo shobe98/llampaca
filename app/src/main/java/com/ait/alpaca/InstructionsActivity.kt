@@ -17,6 +17,8 @@ class InstructionsActivity : AppCompatActivity() {
         Glide.with(this).asGif().load(R.drawable.clouds).into(ivCloudsInstructions)
 
 
+
+
         btnQuitInstructions.setOnClickListener {
             finish()
 
