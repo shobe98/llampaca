@@ -19,8 +19,8 @@ class AlpacaPopup : AppCompatActivity() {
         Glide.with(this).asGif().load(R.drawable.popup).into(ivPopupGrass)
 
 
-        tvPopupName.text = intent.getStringExtra("name")
-        tvPopupDesc.text = intent.getStringExtra("desc")
+        tvPopupName.text = getString(intent.getIntExtra("name", -1))
+        tvPopupDesc.text = getString(intent.getIntExtra("desc", -1))
         ivPopupPic.setImageResource(intent.getIntExtra("image", -1))
 
 
