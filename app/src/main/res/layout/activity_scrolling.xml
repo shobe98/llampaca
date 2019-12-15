@@ -22,21 +22,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:id="@+id/btnChallenge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Challenge me!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recyclerAlpaca" />
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="add placeholder"
-        app:layout_constraintStart_toStartOf="@+id/btnChallenge"
-        app:layout_constraintTop_toTopOf="@+id/btnChallenge"></Button>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

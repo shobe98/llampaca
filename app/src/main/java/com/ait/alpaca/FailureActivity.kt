@@ -13,11 +13,15 @@ class FailureActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_failure)
 
-        Glide.with(this).asGif().load(R.drawable.clouds).into(ivClouds)
+        Glide.with(this).asGif().load(R.drawable.clouds).into(ivCloudsFailure)
 
 
         btnBack.setOnClickListener {
             startActivity(Intent(this@FailureActivity, ChallengeActivity::class.java))
+            finish()
+        }
+
+        btnQuitFailure.setOnClickListener {
             finish()
         }
     }

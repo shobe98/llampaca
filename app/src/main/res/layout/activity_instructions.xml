@@ -11,7 +11,7 @@
 
 
     <ImageView
-        android:id="@+id/ivCloudsSuccess"
+        android:id="@+id/ivCloudsInstructions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -26,8 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ivCloudsPopup"
-        app:layout_constraintTop_toTopOf="@+id/ivCloudsSuccess">
-
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
@@ -37,16 +36,17 @@
             android:orientation="vertical">
 
             <Button
-                android:background="#00F00000"
                 android:id="@+id/btnQuitInstructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="#00F00000"
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="right"
+                android:style="?android:attr/borderlessButtonStyle"
                 android:text="X"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="25sp"
-                android:layout_gravity="right" />
+                android:textSize="25sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -68,15 +68,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:fontFamily="@font/press_start_2p"
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="10dp"
                 android:shadowRadius="5"
-                android:text="Welcome farmer! \n\n You are now in the magical land of Llampaca \n\n There are many rare types of alpacas and llamas to collect here! \n\n Complete the challenges on the challenge page to collect new alpacas and llamas\n\nView your collection on the album page \n\n Happy Hunting :)"
+                android:text="Welcome farmer! \n\n You are now in the magical land of Llampaca \n\n There are many rare types of alpacas and llamas to collect here! \n\n Complete the challenges on the challenge page to collect new alpacas and llamas\n\nView your collection on the album page, and if you finish the game you can restart with the reset button \n\n You cannot access challenges or the album without an internet connection \n\nHappy Hunting :)"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"
-                android:layout_margin="10dp"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
     </LinearLayout>
