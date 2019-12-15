@@ -31,6 +31,10 @@ class MenuActivity : AppCompatActivity(), ProgressUtils.AlpacaHandler {
 
         }
 
+        btnInstructions.setOnClickListener {
+            startActivity(Intent(this@MenuActivity, InstructionsActivity::class.java))
+        }
+
         btnChallenge.setOnClickListener {
             if(!ProgressUtils.isFinished()) {
                 startActivity(Intent(this@MenuActivity, ChallengeActivity::class.java))
