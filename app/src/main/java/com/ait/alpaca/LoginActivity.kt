@@ -26,13 +26,14 @@ class LoginActivity : AppCompatActivity() {
         ).addOnSuccessListener {
             Toast.makeText(
                 this@LoginActivity, "Login OK",
-                Toast.LENGTH_LONG).show()
+                Toast.LENGTH_SHORT).show()
 
             // open Scrolling Activity
             startActivity(
                 Intent(this@LoginActivity,
-                    ScrollingActivity::class.java)
+                    MenuActivity::class.java)
             )
+            finish()
 
         }.addOnFailureListener {
             Toast.makeText(
@@ -60,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this@LoginActivity, "Registration OK",
-                Toast.LENGTH_LONG).show()
+                Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
             Toast.makeText(
                 this@LoginActivity, "Error: ${it.message}",

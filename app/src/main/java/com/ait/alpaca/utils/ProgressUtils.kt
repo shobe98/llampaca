@@ -16,8 +16,7 @@ object ProgressUtils {
     private lateinit var progressionDocument: DocumentReference
 
     fun initializeSingleton(handler: AlpacaHandler) {
-        uid = "e18flAKNdjQktKemQOHjF0HUo9C3" // Peekler for now
-        if (FirebaseAuth.getInstance().currentUser != null) {
+       if (FirebaseAuth.getInstance().currentUser != null) {
             uid = FirebaseAuth.getInstance().currentUser!!.uid
         }
 
@@ -49,21 +48,21 @@ object ProgressUtils {
 
     private fun setUpProgressionListeners(handler: AlpacaHandler) {
         progressionDocument.addSnapshotListener { documentSnapshot: DocumentSnapshot?, firebaseFirestoreException: FirebaseFirestoreException? ->
-            var cloud_alpacas = documentSnapshot!!.get("challenges_solved") as Long
+            var cloudAlpacas = documentSnapshot!!.get("challenges_solved") as Long
 
             when {
                 alpacas == -1L -> {
 
-                    alpacas = cloud_alpacas
-                    Log.i("FIREBASE", "First time fetched from cloud: ${cloud_alpacas}")
+                    alpacas = cloudAlpacas
+                    Log.i("FIREBASE", "First time fetched from cloud: ${cloudAlpacas}")
                     handler.handleAlpacasFirstInnit()
                 }
-                cloud_alpacas > alpacas -> {
-                    alpacas = cloud_alpacas
-                    Log.i("FIREBASE", "Updated from cloud: ${cloud_alpacas}")
+                cloudAlpacas > alpacas -> {
+                    alpacas = cloudAlpacas
+                    Log.i("FIREBASE", "Updated from cloud: ${cloudAlpacas}")
                 }
 
-                cloud_alpacas < alpacas -> uploadAlpacas(alpacas)
+                cloudAlpacas < alpacas -> uploadAlpacas(alpacas)
                 else -> Log.w("FIREBASE", "Snapshot equals!")     // Do nothing if equal!
 
             }

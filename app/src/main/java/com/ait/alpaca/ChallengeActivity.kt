@@ -13,10 +13,8 @@ import android.util.Size
 import android.graphics.Matrix
 import android.util.Log
 import android.view.Surface
-import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.*
-import androidx.core.graphics.scale
 import androidx.lifecycle.LifecycleOwner
 import com.ait.alpaca.utils.ProgressUtils
 import com.bumptech.glide.Glide
@@ -26,6 +24,7 @@ import java.util.concurrent.Executors
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
+import java.util.*
 
 
 class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
@@ -35,17 +34,15 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     fun handleMLLabelingSuccess(labels: MutableList<FirebaseVisionImageLabel>) {
         var successful = false
         for (label in labels) {
-            tvLabels.text = tvLabels.text.toString() + " " + label.text + label.confidence.toString()
-            if (label.text.toLowerCase() == challengeWord.toLowerCase()) {
+           if (label.text.toLowerCase(Locale.ENGLISH) == challengeWord.toLowerCase(Locale.ENGLISH)) {
                 successful = true
 
-               // successfullChallenge() // This finishes the activity.
-
+                successfullChallenge() // This finishes the activity.
             }
         }
 
         if (!successful) {
-            //failedChallenge()
+            failedChallenge()
             tvLabels.setOnClickListener {
                 failedChallenge()
             }
@@ -53,7 +50,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
     }
 
     private fun failedChallenge() {
-        Toast.makeText(this@ChallengeActivity, "You suck! Can't you find a picture of ${challengeWord}??", Toast.LENGTH_LONG).show()
+        Log.i("FAILED_CHALLENGE", "You suck! Can't you find a picture of ${challengeWord}??")
         startActivity(Intent(this@ChallengeActivity, FailureActivity::class.java))
         finish()
 
@@ -62,7 +59,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
 
     private fun successfullChallenge() {
         ProgressUtils.updateAlpacas()
-        Toast.makeText(this@ChallengeActivity, "Updated your progress!", Toast.LENGTH_LONG).show()
+        Log.i("SUCCESSFUL_CHALLENGE","Updated your progress!")
         startActivity(Intent(this@ChallengeActivity, SuccessActivity::class.java))
         finish()
     }
@@ -72,8 +69,8 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         super.onStop()
     }
 
-    fun handleFailure(e: Exception) {
-        Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+    fun handleMLResponseFailure(e: Exception) {
+        Log.e("ML_ERROR", e.message)
         throw(Throwable(e))
     }
 
@@ -105,7 +102,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
         challengeWord = resources.getStringArray(R.array.words)[challengeNumber.toInt() + 1]
 
         challenge_placeholder.text =
-            challengeWord.toUpperCase() + " " + challengeNumber.toString()
+            challengeWord.toUpperCase(Locale.ENGLISH)
 
     }
 
@@ -206,7 +203,7 @@ class ChallengeActivity : AppCompatActivity(), LifecycleOwner {
                                 handleMLLabelingSuccess(labels)
                             }
                             .addOnFailureListener { e ->
-                                handleFailure(e)
+                                handleMLResponseFailure(e)
                             }
                     }
                 })
